@@ -1,0 +1,46 @@
+# Godot Engine — Version Reference
+
+| Field | Value |
+|-------|-------|
+| **Engine Version** | Godot 4.6.1 |
+| **Release Date** | February 2026 |
+| **Project Pinned** | 2026-03-30 |
+| **Last Docs Verified** | 2026-03-30 |
+| **LLM Knowledge Cutoff** | May 2025 |
+
+## Knowledge Gap Warning
+
+The LLM's training data likely covers Godot up to ~4.3. Versions 4.4, 4.5,
+and 4.6 introduced significant changes that the model does NOT know about.
+Always cross-reference this directory before suggesting Godot API calls.
+
+## Post-Cutoff Version Timeline
+
+| Version | Release | Risk Level | Key Theme |
+|---------|---------|------------|-----------|
+| 4.4 | ~Mid 2025 | MEDIUM | Jolt physics option, FileAccess return types, shader texture type changes |
+| 4.5 | ~Late 2025 | HIGH | Accessibility (AccessKit), variadic args, @abstract, shader baker, SMAA |
+| 4.6 | Jan 2026 | HIGH | Jolt default, glow rework, D3D12 default on Windows, IK restored |
+| 4.6.1 | Feb 2026 | HIGH | Maintenance release - stability, usability, bug fixes |
+
+## Key Changes in 4.6.x (Post-Cutoff)
+
+### Godot 4.6 Highlights
+- **Jolt Physics** is now the default physics engine (replacing GodotPhysics)
+- **Glow/SSR rework** — significant visual changes
+- **D3D12 default on Windows** — better Windows performance
+- **IK restored** — inverse kinematics support
+- **Modern UI improvements**
+
+### Godot 4.6.1 Changes
+- Stability and usability improvements
+- Various bug fixes
+- Quality-of-life improvements
+
+## Verified Sources
+
+- Official docs: https://docs.godotengine.org/en/stable/
+- 4.5→4.6 migration: https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.6.html
+- 4.4→4.5 migration: https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.5.html
+- Changelog: https://github.com/godotengine/godot/blob/master/CHANGELOG.md
+- Release notes: https://godotengine.org/releases/4.6/

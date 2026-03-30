@@ -1,0 +1,111 @@
+{
+  "realms": [
+    {
+      "id": 0,
+      "name": "凡人",
+      "title": "凡人",
+      "description": "汝乃凡人，当勤勉修炼，方可踏入仙途。",
+      "required_cultivation": 0,
+      "unlocked_difficulties": ["easy"],
+      "theme_color": "#B0BEC5",
+      "real_world_level": "入门级"
+    },
+    {
+      "id": 1,
+      "name": "炼气",
+      "title": "炼气期弟子",
+      "description": "初踏仙途，吸收天地灵气，感悟编程之道。炼气期弟子可尝试中等难度题目。",
+      "required_cultivation": 100,
+      "unlocked_difficulties": ["easy", "medium"],
+      "breakthrough_trial": {
+        "question_count": 5,
+        "difficulty": "easy",
+        "required_correct": 3,
+        "fail_penalty_percent": 5
+      },
+      "theme_color": "#90CAF9",
+      "real_world_level": "初级工程师"
+    },
+    {
+      "id": 2,
+      "name": "筑基",
+      "title": "筑基期修士",
+      "description": "奠定修炼根基，筑基之期已到。可尝试困难难度题目，挑战更高境界。",
+      "required_cultivation": 500,
+      "unlocked_difficulties": ["easy", "medium", "hard"],
+      "breakthrough_trial": {
+        "question_count": 8,
+        "difficulty": "medium",
+        "required_correct": 5,
+        "fail_penalty_percent": 10
+      },
+      "theme_color": "#A5D6A7",
+      "real_world_level": "中级工程师"
+    },
+    {
+      "id": 3,
+      "name": "金丹",
+      "title": "金丹期真人",
+      "description": "凝聚金丹，脱胎换骨，已是大能。可挑战独角兽BOSS面试。",
+      "required_cultivation": 1500,
+      "unlocked_difficulties": ["easy", "medium", "hard"],
+      "unlocked_bosses": ["unicorn"],
+      "breakthrough_trial": {
+        "question_count": 10,
+        "difficulty": "medium",
+        "required_correct": 8,
+        "time_limit_seconds": 900,
+        "fail_penalty_percent": 10
+      },
+      "theme_color": "#FFD54F",
+      "real_world_level": "高级工程师"
+    },
+    {
+      "id": 4,
+      "name": "元婴",
+      "title": "元婴期老祖",
+      "description": "元婴出窍，神游太虚，智慧通天。可挑战大厂BOSS面试。",
+      "required_cultivation": 4000,
+      "unlocked_difficulties": ["easy", "medium", "hard"],
+      "unlocked_bosses": ["unicorn", "big_tech"],
+      "breakthrough_trial": {
+        "question_count": 8,
+        "difficulty": "hard",
+        "required_correct": 6,
+        "time_limit_seconds": 1200,
+        "fail_penalty_percent": 15
+      },
+      "theme_color": "#FF8A65",
+      "real_world_level": "资深工程师"
+    },
+    {
+      "id": 5,
+      "name": "化神",
+      "title": "化神期尊者",
+      "description": "化神分身，千变万化，已近大道。可挑战所有门派BOSS。",
+      "required_cultivation": 10000,
+      "unlocked_difficulties": ["easy", "medium", "hard"],
+      "unlocked_bosses": ["unicorn", "big_tech", "all"],
+      "breakthrough_trial": {
+        "question_count": 12,
+        "difficulty": "hard",
+        "required_correct": 10,
+        "time_limit_seconds": 1800,
+        "fail_penalty_percent": 15
+      },
+      "theme_color": "#CE93D8",
+      "real_world_level": "架构师/专家"
+    },
+    {
+      "id": 6,
+      "name": "飞升",
+      "title": "飞升仙人",
+      "description": "白日飞升，得道成仙，Offer在手！恭喜你完成了修仙之旅！",
+      "required_cultivation": 999999,
+      "unlocked_difficulties": ["easy", "medium", "hard"],
+      "unlocked_bosses": ["all"],
+      "theme_color": "#FFD700",
+      "real_world_level": "拿到Offer"
+    }
+  ]
+}

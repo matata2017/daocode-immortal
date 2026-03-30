@@ -1,0 +1,386 @@
+{
+  "questions": [
+    {
+      "id": "java-001",
+      "title": "HashMap底层实现",
+      "content": "Java中HashMap的底层实现是什么？它在JDK7和JDK8中有什么区别？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "集合框架",
+      "tags": ["HashMap", "集合", "高频"],
+      "options": [
+        "数组+链表，JDK8后链表过长会转红黑树",
+        "纯数组实现，通过hash直接定位",
+        "红黑树实现，保证有序性",
+        "链表实现，支持动态扩容"
+      ],
+      "correct_answer": 0,
+      "explanation": "HashMap底层是数组+链表结构（拉链法）。JDK7中链表采用头插法，JDK8改为尾插法，且当链表长度>=8且数组长度>=64时，链表会转换为红黑树以提高查询效率。扩容条件是元素个数 > 数组长度 * loadFactor（默认0.75）。",
+      "knowledge_point": "HashMap的put流程：计算hash → 定位桶 → 遍历链表/红黑树 → 插入/更新。时间复杂度：理想O(1)，最差O(n)→O(logn)（JDK8红黑树）。",
+      "base_score": 10
+    },
+    {
+      "id": "java-002",
+      "title": "ArrayList vs LinkedList",
+      "content": "ArrayList和LinkedList的区别是什么？什么场景下应该选择LinkedList？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "集合框架",
+      "tags": ["ArrayList", "LinkedList", "集合"],
+      "options": [
+        "ArrayList基于数组，LinkedList基于双向链表。LinkedList适合频繁插入删除场景",
+        "ArrayList和LinkedList底层都是数组，只是实现方式不同",
+        "LinkedList查询更快，ArrayList插入更快",
+        "两者没有本质区别，可以随意替换"
+      ],
+      "correct_answer": 0,
+      "explanation": "ArrayList基于动态数组，随机访问O(1)，尾部插入O(1)，中间插入O(n)需要移动元素。LinkedList基于双向链表，随机访问O(n)，插入删除O(1)但需要先定位到位置。实际开发中ArrayList更常用，因为现代CPU缓存对数组更友好。",
+      "base_score": 10
+    },
+    {
+      "id": "java-003",
+      "title": "ConcurrentHashMap实现原理",
+      "content": "ConcurrentHashMap是如何保证线程安全的？JDK7和JDK8的实现有什么区别？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "集合框架",
+      "tags": ["ConcurrentHashMap", "并发", "线程安全", "高频"],
+      "options": [
+        "JDK7用分段锁，JDK8用CAS+synchronized锁单个桶",
+        "全表加锁，类似Hashtable",
+        "使用CopyOnWrite机制",
+        "使用volatile保证可见性即可"
+      ],
+      "correct_answer": 0,
+      "explanation": "JDK7采用Segment分段锁，将数据分成多个段，每个段一把锁，并发度由Segment数量决定。JDK8摒弃Segment，采用CAS+synchronized锁单个桶节点，粒度更细，并发度更高，且结构简化接近HashMap。synchronized在JDK6后有优化，性能不差ReentrantLock。",
+      "knowledge_point": "JDK8 put流程：计算hash → 定位桶 → CAS尝试插入 → 失败则synchronized锁头节点 → 插入/更新。",
+      "base_score": 15
+    },
+    {
+      "id": "java-004",
+      "title": "Spring Bean生命周期",
+      "content": "Spring Bean的完整生命周期包含哪些阶段？BeanPostProcessor在什么时候执行？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "Spring框架",
+      "tags": ["Spring", "Bean", "生命周期", "高频"],
+      "options": [
+        "实例化→属性注入→初始化前处理→初始化→初始化后处理→销毁。BeanPostProcessor在初始化前后执行",
+        "加载→实例化→运行→销毁",
+        "创建→使用→回收",
+        "编译→链接→执行"
+      ],
+      "correct_answer": 0,
+      "explanation": "Spring Bean生命周期：1.实例化（构造器） 2.属性注入（DI） 3.BeanNameAware/BeanFactoryAware回调 4.BeanPostProcessor.postProcessBeforeInitialization 5.InitializingBean.afterPropertiesSet/init-method 6.BeanPostProcessor.postProcessAfterInitialization 7.使用 8.DestructionAwareBeanPostProcessor/Destruction回调。",
+      "base_score": 15
+    },
+    {
+      "id": "java-005",
+      "title": "Spring事务传播机制",
+      "content": "Spring事务的传播机制有哪些？REQUIRED和REQUIRES_NEW有什么区别？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "Spring框架",
+      "tags": ["Spring", "事务", "传播机制"],
+      "options": [
+        "REQUIRED加入当前事务，REQUIRES_NEW挂起当前事务创建新事务",
+        "REQUIRED创建新事务，REQUIRES_NEW加入当前事务",
+        "两者没有区别，都是创建新事务",
+        "REQUIRED不支持事务，REQUIRES_NEW支持事务"
+      ],
+      "correct_answer": 0,
+      "explanation": "REQUIRED（默认）：有事务就加入，没有就新建。REQUIRES_NEW：总是新建事务，如果当前有事务则挂起。其他传播行为：SUPPORTS（有就加入）、NOT_SUPPORTED（以非事务方式运行）、MANDATORY（必须有事务）、NEVER（不能有事务）、NESTED（嵌套事务，基于savepoint）。",
+      "base_score": 15
+    },
+    {
+      "id": "java-006",
+      "title": "线程池核心参数",
+      "content": "Java线程池有哪些核心参数？线程创建的流程是什么？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "多线程",
+      "tags": ["线程池", "并发", "高频"],
+      "options": [
+        "corePoolSize、maximumPoolSize、keepAliveTime、workQueue、threadFactory、handler。先判断core→再入队→再创建非核心线程",
+        "只有核心线程数和最大线程数两个参数",
+        "先创建最大线程数，再收缩到核心线程数",
+        "线程池会立即创建corePoolSize个线程"
+      ],
+      "correct_answer": 0,
+      "explanation": "线程池执行流程：1.运行线程数<corePoolSize，创建核心线程执行任务 2.运行线程数>=corePoolSize，任务入队 3.队列满，创建非核心线程直到maximumPoolSize 4.运行线程数=maximumPoolSize且队列满，执行拒绝策略。拒绝策略：AbortPolicy（默认抛异常）、CallerRunsPolicy（调用者执行）、DiscardPolicy（静默丢弃）、DiscardOldestPolicy（丢弃最老任务）。",
+      "base_score": 18
+    },
+    {
+      "id": "java-007",
+      "title": "volatile关键字",
+      "content": "volatile关键字的作用是什么？它能保证原子性吗？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "多线程",
+      "tags": ["volatile", "并发", "可见性"],
+      "options": [
+        "保证可见性和禁止指令重排，不能保证原子性",
+        "保证原子性、可见性、有序性",
+        "只能保证可见性，不能禁止重排",
+        "volatile是轻量级锁，可以替代synchronized"
+      ],
+      "correct_answer": 0,
+      "explanation": "volatile两大作用：1.保证可见性（JMM模型，写操作立即刷新到主内存，读操作从主内存读取）2.禁止指令重排（通过内存屏障Memory Barrier实现）。volatile不能保证原子性，如count++操作需要用AtomicInteger或synchronized。适用场景：状态标志位、单例双重检查锁定（DCL）。",
+      "base_score": 12
+    },
+    {
+      "id": "java-008",
+      "title": "Synchronized原理",
+      "content": "synchronized的底层原理是什么？锁升级过程是怎样的？",
+      "type": "choice",
+      "difficulty": "hard",
+      "realm": "Java",
+      "topic": "多线程",
+      "tags": ["synchronized", "锁", "并发", "高频"],
+      "options": [
+        "基于Monitor实现，锁升级：无锁→偏向锁→轻量级锁→重量级锁",
+        "基于CAS实现，性能很高",
+        "只是语法糖，底层调用操作系统的互斥量",
+        "每次都使用重量级锁，性能较差"
+      ],
+      "correct_answer": 0,
+      "explanation": "synchronized基于对象的Monitor实现。JDK6后引入锁升级优化：偏向锁（单线程重入，CAS修改Mark Word）→轻量级锁（多线程交替执行，CAS自旋）→重量级锁（竞争激烈，阻塞等待）。锁升级不可逆，但偏向锁可以被重置。Mark Word记录锁状态、线程ID、锁记录指针等信息。",
+      "base_score": 20
+    },
+    {
+      "id": "java-009",
+      "title": "JVM内存模型",
+      "content": "JVM运行时数据区包含哪些部分？堆和栈的区别是什么？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "JVM",
+      "tags": ["JVM", "内存模型", "堆", "栈"],
+      "options": [
+        "程序计数器、虚拟机栈、本地方法栈、堆、方法区。堆存对象，栈存局部变量和方法调用",
+        "只有堆和栈两部分",
+        "堆存基本类型，栈存引用类型",
+        "栈空间比堆空间大得多"
+      ],
+      "correct_answer": 0,
+      "explanation": "JVM运行时数据区：1.程序计数器（线程私有，记录执行位置）2.虚拟机栈（线程私有，每个方法一个栈帧）3.本地方法栈（Native方法）4.堆（线程共享，对象实例）5.方法区（类信息、常量、静态变量）。栈是线程私有的，生命周期随线程，不存在GC问题。堆是GC主要区域。",
+      "base_score": 10
+    },
+    {
+      "id": "java-010",
+      "title": "GC算法",
+      "content": "常见的垃圾收集算法有哪些？CMS和G1的区别是什么？",
+      "type": "choice",
+      "difficulty": "hard",
+      "realm": "Java",
+      "topic": "JVM",
+      "tags": ["JVM", "GC", "垃圾收集"],
+      "options": [
+        "标记-清除、标记-整理、复制算法。CMS并发收集，G1分区收集",
+        "只有引用计数和标记清除两种",
+        "CMS用于老年代，G1用于新生代",
+        "G1是单线程收集器，CMS是多线程"
+      ],
+      "correct_answer": 0,
+      "explanation": "三种基础算法：标记-清除（碎片问题）、标记-整理（移动开销）、复制算法（空间浪费）。CMS：并发标记清除，关注低停顿，有碎片问题。G1：将堆分成多个Region，可预测停顿时间，无碎片（整体是复制算法）。ZGC：JDK11引入，停顿时间<10ms。Serial/Parallel是不同组合方式。",
+      "base_score": 20
+    },
+    {
+      "id": "mysql-001",
+      "title": "索引最左匹配原则",
+      "content": "MySQL联合索引的最左匹配原则是什么？哪些情况会导致索引失效？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "MySQL",
+      "topic": "索引",
+      "tags": ["MySQL", "索引", "高频"],
+      "options": [
+        "联合索引从左到右依次匹配。跳过左列、使用函数、类型转换会导致失效",
+        "联合索引任意列都能走索引",
+        "只有第一列有效，后面的列不影响",
+        "索引永远不会失效"
+      ],
+      "correct_answer": 0,
+      "explanation": "最左匹配原则：联合索引(a,b,c)，查询a或a,b或a,b,c都能用索引。失效情况：1.跳过左列（WHERE b=1）2.列上有函数（WHERE YEAR(create_time)=2024）3.隐式类型转换（字符串字段用数字查）4.LIKE以%开头（LIKE '%abc'）5.OR条件中有非索引列 6.IS NULL / IS NOT NULL（视情况）。",
+      "base_score": 10
+    },
+    {
+      "id": "mysql-002",
+      "title": "事务隔离级别",
+      "content": "MySQL事务有哪些隔离级别？默认是什么级别？各解决什么问题？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "MySQL",
+      "topic": "事务",
+      "tags": ["MySQL", "事务", "隔离级别", "高频"],
+      "options": [
+        "读未提交、读已提交、可重复读、串行化。默认可重复读，解决脏读、不可重复读、幻读",
+        "只有读和写两种隔离级别",
+        "默认是读未提交，性能最好",
+        "串行化是默认级别，最安全"
+      ],
+      "correct_answer": 0,
+      "explanation": "四种隔离级别：1.读未提交（脏读、不可重复读、幻读）2.读已提交（解决脏读）3.可重复读（解决脏读、不可重复读，MySQL通过MVCC+Next-Key Lock也解决大部分幻读）4.串行化（全部解决）。MySQL默认RR，Oracle默认RC。MVCC实现读已提交和可重复读，通过Undo Log版本链。",
+      "base_score": 15
+    },
+    {
+      "id": "mysql-003",
+      "title": "MVCC原理",
+      "content": "MySQL的MVCC是如何实现的？Read View是什么？",
+      "type": "choice",
+      "difficulty": "hard",
+      "realm": "MySQL",
+      "topic": "事务",
+      "tags": ["MySQL", "MVCC", "并发"],
+      "options": [
+        "通过Undo Log版本链+Read View实现。Read View记录当前活跃事务，判断版本可见性",
+        "MVCC通过锁实现",
+        "每个事务都有一份数据副本",
+        "MVCC只在串行化级别生效"
+      ],
+      "correct_answer": 0,
+      "explanation": "MVCC实现：1.Undo Log记录数据历史版本，形成版本链 2.Read View在查询时创建，包含m_ids（活跃事务ID）、min_trx_id、max_trx_id、creator_trx_id 3.访问数据时，根据trx_id和Read View判断该版本是否可见 4.RC级别每次查询生成新Read View，RR级别事务开始时生成一次。",
+      "base_score": 20
+    },
+    {
+      "id": "redis-001",
+      "title": "Redis数据类型",
+      "content": "Redis有哪些基本数据类型？各有什么应用场景？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Redis",
+      "topic": "数据类型",
+      "tags": ["Redis", "数据结构"],
+      "options": [
+        "String、List、Hash、Set、Sorted Set。String缓存/计数器，Hash对象存储，List消息队列，Set去重，ZSet排行榜",
+        "只有String和Hash两种",
+        "Redis是键值存储，没有数据类型概念",
+        "所有类型底层都是数组实现"
+      ],
+      "correct_answer": 0,
+      "explanation": "五种基本类型：1.String（缓存、分布式锁、计数器）2.Hash（对象存储、购物车）3.List（消息队列、最新列表，底层quicklist）4.Set（去重、交集并集、共同关注）5.ZSet（排行榜、延时队列）。高级类型：Bitmap（签到）、HyperLogLog（基数统计）、GEO（地理位置）、Stream（消息队列）。",
+      "base_score": 10
+    },
+    {
+      "id": "redis-002",
+      "title": "缓存穿透击穿雪崩",
+      "content": "什么是缓存穿透、缓存击穿、缓存雪崩？如何解决？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Redis",
+      "topic": "缓存",
+      "tags": ["Redis", "缓存", "高频"],
+      "options": [
+        "穿透：查不存在的数据。击穿：热点key过期。雪崩：大量key同时过期。解决方案：布隆过滤器、互斥锁、随机过期时间",
+        "这三个是同一种问题的不同叫法",
+        "缓存穿透是缓存失效，需要重启Redis",
+        "只能通过增加缓存容量解决"
+      ],
+      "correct_answer": 0,
+      "explanation": "三大问题：1.缓存穿透（查询不存在的数据，绕过缓存直接打DB）→布隆过滤器、缓存空值 2.缓存击穿（热点key过期瞬间大量请求打DB）→互斥锁重建缓存、逻辑过期不删除 3.缓存雪崩（大量key同时过期或Redis宕机）→随机过期时间、多级缓存、熔断降级、Redis集群高可用。",
+      "base_score": 18
+    },
+    {
+      "id": "redis-003",
+      "title": "Redis持久化",
+      "content": "Redis的RDB和AOF持久化有什么区别？生产环境如何选择？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Redis",
+      "topic": "持久化",
+      "tags": ["Redis", "RDB", "AOF"],
+      "options": [
+        "RDB定时快照，文件小恢复快但有数据丢失风险。AOF记录写命令，数据更安全但文件大。生产可混合使用",
+        "RDB和AOF功能完全一样",
+        "生产环境只能选一种",
+        "Redis不需要持久化，都在内存中"
+      ],
+      "correct_answer": 0,
+      "explanation": "RDB：fork子进程生成快照，compact格式，恢复快，但fork期间可能阻塞，两次快照间数据可能丢失。AOF：追加写命令，可读可修复，提供always/everysec/no三种刷盘策略。混合持久化（Redis4.0+）：RDB做基础，AOF追加增量。生产建议：主从复制+哨兵/集群，开启AOF+混合持久化。",
+      "base_score": 15
+    },
+    {
+      "id": "springboot-001",
+      "title": "Spring Boot自动装配",
+      "content": "Spring Boot的自动装配原理是什么？@SpringBootApplication注解做了什么？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "Spring Boot",
+      "tags": ["SpringBoot", "自动装配", "原理"],
+      "options": [
+        "@SpringBootApplication包含@EnableAutoConfiguration，通过SpringFactoriesLoader加载META-INF/spring.factories中的自动配置类",
+        "Spring Boot会扫描所有jar包自动配置",
+        "需要手动配置所有Bean",
+        "@SpringBootApplication只是一个标记注解"
+      ],
+      "correct_answer": 0,
+      "explanation": "@SpringBootApplication是组合注解：@SpringBootConfiguration（配置类）+@EnableAutoConfiguration（自动装配）+@ComponentScan（组件扫描）。@EnableAutoConfiguration通过@Import(AutoConfigurationImportSelector)导入自动配置类，核心是SpringFactoriesLoader.loadFactoryNames()读取META-INF/spring.factories，配合@Conditional条件注解决定是否生效。",
+      "base_score": 18
+    },
+    {
+      "id": "design-001",
+      "title": "单例模式实现",
+      "content": "Java中有哪些方式实现单例模式？双重检查锁定为什么要用volatile？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "设计模式",
+      "tags": ["设计模式", "单例", "并发"],
+      "options": [
+        "饿汉式、懒汉式、双重检查锁定、静态内部类、枚举。volatile禁止指令重排，防止返回未初始化的对象",
+        "只有饿汉式和懒汉式两种",
+        "volatile是为了提高性能",
+        "单例模式不需要考虑线程安全"
+      ],
+      "correct_answer": 0,
+      "explanation": "五种实现方式：1.饿汉式（类加载时创建，无线程问题但浪费资源）2.懒汉式（延迟加载，需要同步）3.DCL（双重检查锁定，volatile禁止instance=new Singleton()的指令重排）4.静态内部类（利用类加载机制，延迟且线程安全）5.枚举（最佳实践，防止反射攻击和序列化问题）。DCL不加volatile可能返回半初始化对象。",
+      "base_score": 12
+    },
+    {
+      "id": "design-002",
+      "title": "设计模式分类",
+      "content": "GoF设计模式分为哪几类？工厂方法和抽象工厂有什么区别？",
+      "type": "choice",
+      "difficulty": "easy",
+      "realm": "Java",
+      "topic": "设计模式",
+      "tags": ["设计模式", "工厂模式"],
+      "options": [
+        "创建型、结构型、行为型三类。工厂方法创建一种产品，抽象工厂创建产品族",
+        "只有创建型和行为型两类",
+        "工厂方法和抽象工厂是同一个模式",
+        "抽象工厂比工厂方法简单"
+      ],
+      "correct_answer": 0,
+      "explanation": "GoF 23种设计模式分三类：1.创建型（对象创建）：单例、工厂方法、抽象工厂、建造者、原型 2.结构型（类/对象组合）：适配器、装饰器、代理、外观、桥接、组合、享元 3.行为型（对象交互）：策略、模板、观察者、迭代器、责任链、命令、备忘录、状态、访问者、中介者、解释器。",
+      "base_score": 10
+    },
+    {
+      "id": "design-003",
+      "title": "策略模式应用",
+      "content": "策略模式的应用场景是什么？它和状态模式有什么区别？",
+      "type": "choice",
+      "difficulty": "medium",
+      "realm": "Java",
+      "topic": "设计模式",
+      "tags": ["设计模式", "策略模式"],
+      "options": [
+        "策略模式用于算法可替换场景，客户端选择策略。状态模式由状态自动切换行为",
+        "策略模式和状态模式是一样的",
+        "策略模式不能在运行时切换算法",
+        "状态模式需要客户端维护状态"
+      ],
+      "correct_answer": 0,
+      "explanation": "策略模式：定义算法族，让它们可以互相替换。适用场景：1.多种方式完成同一任务（支付方式、排序算法）2.避免大量if-else。状态模式：对象行为随状态改变而改变，状态自动转换。区别：策略模式由客户端选择策略，状态模式由状态对象决定下一个状态。策略模式关注算法可替换，状态模式关注状态流转。",
+      "base_score": 15
+    }
+  ]
+}

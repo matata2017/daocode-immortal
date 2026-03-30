@@ -1,0 +1,112 @@
+{
+  "factions": [
+    {
+      "id": 0,
+      "name": "Java派",
+      "full_name": "Java Collection Sect",
+      "tagline": "一次编写，到处运行",
+      "lore": "吾派传承自上古 Sun 宗，后为 Oracle 大能所收。门中弟子以"一次编写，到处运行"为修仙信条。\n\n绝学包括集合框架心法、并发术式、JVM 内功、Spring 剑法四大领域。其中集合框架为入门根基，JVM 内功为进阶核心。\n\n门派驻地：万物皆对象峰",
+      "theme_color": "#F89820",
+      "unlock_realm": 0,
+      "is_dlc": false,
+      "skill_domains": [
+        {
+          "id": "collections",
+          "name": "集合框架",
+          "description": "ArrayList, LinkedList, HashMap, HashSet, LinkedHashMap",
+          "question_count": 50
+        },
+        {
+          "id": "concurrency",
+          "name": "并发心法",
+          "description": "synchronized, volatile, ThreadPool, ConcurrentHashMap",
+          "question_count": 40
+        },
+        {
+          "id": "jvm",
+          "name": "JVM内功",
+          "description": "内存模型, GC算法, 类加载机制, JIT优化",
+          "question_count": 30
+        },
+        {
+          "id": "spring",
+          "name": "Spring剑法",
+          "description": "IoC容器, AOP原理, SpringBoot自动配置",
+          "question_count": 40
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Go派",
+      "full_name": "Go Concurrency Sect",
+      "tagline": "简洁并发，高效如飞",
+      "lore": "吾派诞生于 Google 仙山，以"简洁并发，高效如飞"著称。门中弟子崇尚大道至简，代码如诗。\n\n绝学包括基础语法、并发模型、Runtime 心法、Web 实战四大领域。其中并发模型为镇派之宝，goroutine 之术独步天下。\n\n门派驻地：云原生峰",
+      "theme_color": "#00ADD8",
+      "unlock_realm": 0,
+      "is_dlc": false,
+      "skill_domains": [
+        {
+          "id": "basics",
+          "name": "基础语法",
+          "description": "变量声明, 切片操作, map, 结构体, 接口",
+          "question_count": 40
+        },
+        {
+          "id": "concurrency",
+          "name": "并发模型",
+          "description": "goroutine, channel, select, context, sync包",
+          "question_count": 50
+        },
+        {
+          "id": "runtime",
+          "name": "Runtime心法",
+          "description": "GC原理, GMP调度, 内存模型",
+          "question_count": 30
+        },
+        {
+          "id": "web",
+          "name": "Web实战",
+          "description": "gin/echo框架, middleware, RESTful设计",
+          "question_count": 40
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "C++派",
+      "full_name": "C++ Memory Sect",
+      "tagline": "掌控内存，无所不能",
+      "lore": "吾派传承最为古老，以掌控内存著称。门中弟子需历经磨难，方得大成。\n\n绝学包括STL容器、内存管理、模板元编程、现代C++四大领域。\n\n门派驻地：指针深渊",
+      "theme_color": "#00599C",
+      "unlock_realm": 0,
+      "is_dlc": true,
+      "skill_domains": [
+        {
+          "id": "stl",
+          "name": "STL容器",
+          "description": "vector, map, unordered_map, iterator",
+          "question_count": 35
+        },
+        {
+          "id": "memory",
+          "name": "内存管理",
+          "description": "智能指针, RAII, 内存泄漏检测",
+          "question_count": 40
+        },
+        {
+          "id": "template",
+          "name": "模板元编程",
+          "description": "模板特化, SFINAE, 变参模板",
+          "question_count": 25
+        },
+        {
+          "id": "modern",
+          "name": "现代C++",
+          "description": "C++11/14/17/20新特性, lambda, move语义",
+          "question_count": 30
+        }
+      ]
+    }
+  ]
+}
